@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: transaction
+  datasource:
+    url: jdbc:postgresql://localhost:5432/transaction
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
