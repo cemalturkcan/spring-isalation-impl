@@ -15,12 +15,12 @@ public class TestController {
     private final TestService testService;
 
     @GetMapping("/read-committed")
-    public Double testSetBalanceReadCommitted() throws InterruptedException {
+    public Double testSetBalanceReadCommitted() {
         return testService.testSetBalanceReadCommitted();
     }
 
     @GetMapping("/repeatable-read")
-    public Double testSetBalanceRepeatableRead() throws InterruptedException {
+    public Double testSetBalanceRepeatableRead() {
         return testService.testSetBalanceRepeatableRead();
     }
 

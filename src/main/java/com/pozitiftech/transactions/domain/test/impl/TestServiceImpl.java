@@ -13,7 +13,7 @@ public class TestServiceImpl implements TestService {
     private final WalletService walletService;
 
     @Override
-    public Double testSetBalanceReadCommitted() throws InterruptedException {
+    public Double testSetBalanceReadCommitted() {
         Thread thread1 = new Thread(() -> walletService.addBalanceReadCommitted(1L, 200.0));
         Thread thread2 = new Thread(() -> walletService.addBalanceReadCommitted(1L, 500.0));
         makeAsyncCalls(
@@ -25,7 +25,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Double testSetBalanceRepeatableRead() throws InterruptedException {
+    public Double testSetBalanceRepeatableRead() {
         Thread thread1 = new Thread(() -> walletService.addBalanceRepeatableRead(1L, 200.0));
         Thread thread2 = new Thread(() -> walletService.addBalanceRepeatableRead(1L, 500.0));
         makeAsyncCalls(
@@ -38,11 +38,15 @@ public class TestServiceImpl implements TestService {
     private void makeAsyncCalls(
             Thread thread1,
             Thread thread2
-    ) throws InterruptedException {
+    )  {
         thread1.start();
         thread2.start();
-        thread1.join();
-        thread2.join();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException ignored) {
+        }
     }
 
 }
